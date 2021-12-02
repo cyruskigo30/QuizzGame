@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'question.dart';
 
 void main() => runApp(const Quizzler());
 
@@ -32,19 +33,28 @@ class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [
     //You can use Icon as datattype since all children are Icons elese you could have used <widget>
   ];
-  List<String> questions = [
-    'You can lead a cow down stairs but not up stairs.',
-    'Approximately one quarter of human bones are in the feet.',
-    'A slug\'s blood is green.'
+  // List<String> questions = [
+  //   'You can lead a cow down stairs but not up stairs.',
+  //   'Approximately one quarter of human bones are in the feet.',
+  //   'A slug\'s blood is green.'
+  // ];
+  // List<bool> answers = [
+  //   false,
+  //   true,
+  //   true,
+  // ];
+  // Create a new varibale (object  (q1) from a constructor) of data type question
+  // Question q1 = Question(
+  //     q: 'You can lead a cow down stairs but not up stairs.', a: false);
+  // Create a new list with objects (from the constructor) of data type question
+  List<Question> questionBank = [
+    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
+    Question(
+        q: 'Approximately one quarter of human bones are in the feet.',
+        a: true),
+    Question(q: 'A slug\'s blood is green.', a: false),
   ];
-  List<bool> answers = [
-    false,
-    true,
-    true,
-  ];
-
   int questionNumber = 0;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -57,7 +67,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                questions[questionNumber],
+                questionBank[questionNumber].questionText,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 25.0,
@@ -82,6 +92,14 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                // The user picked true
+                bool correctAnswer =
+                    questionBank[questionNumber].questionAnswer;
+                if (correctAnswer == true) {
+                  print('User got it right');
+                } else {
+                  print('User got it wrong');
+                }
                 setState(() {
                   scoreKeeper.add(
                     const Icon(
@@ -111,6 +129,14 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                bool correctAnswer =
+                    questionBank[questionNumber].questionAnswer;
+                if (correctAnswer == false) {
+                  print('User got it right');
+                } else {
+                  print('User got it wrong');
+                }
+
                 setState(() {
                   scoreKeeper.add(
                     const Icon(
